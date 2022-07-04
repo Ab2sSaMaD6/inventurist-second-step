@@ -1,0 +1,33 @@
+
+
+@media screen and (min-width: 600px) {
+    /* .halfWidth {
+        grid-column: span 2 / auto;
+    }
+
+    .fullWidth {
+        grid-column: span 4 / auto;
+    } */
+}
+
+
+
+@media screen and (max-width: 600px) {
+    /* .halfWidth {
+        grid-column: span 2 / auto;
+    }
+
+    .fullWidth {
+        grid-column: span 2 / auto;
+    } */
+}
+
+@media screen and (max-width: 300px) {
+    /* .submitButton, .resetButton {
+        grid-column: span 2 / auto;
+        width: 100%;
+        align-self: stretch;
+        justify-self: stretch;
+
+    } */
+}
