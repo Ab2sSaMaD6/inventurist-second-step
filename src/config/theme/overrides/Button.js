@@ -41,6 +41,8 @@ export default function Button(theme) {
         },
         text: {
           textDecoration: 'underline',
+
+          borderRadius: 0,
           '&:hover': {
             textDecoration: 'underline',
             backgroundColor: theme.palette.action.hover

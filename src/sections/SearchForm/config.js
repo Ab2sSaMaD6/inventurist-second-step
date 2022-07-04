@@ -26,7 +26,7 @@ export const configurer = ({ contextOptions = [] }) => ({
       name: 'is_only',
       type: 'checkbox',
       label: 'Only search webpage titles',
-      classes: 'fullWidth',
+      classes: 'fullWidth'
     },
     {
       name: 'market',
@@ -34,10 +34,10 @@ export const configurer = ({ contextOptions = [] }) => ({
       label: 'Select market',
       classes: 'halfWidth',
       options: [
-        {id: 'market1', title: 'market market market market market1'},
-        {id: 'market2', title: 'market market marketmarket 2'},
-        {id: 'market3', title: 'market 3'},
+        { id: 'market1', title: 'market1' },
+        { id: 'market2', title: 'market 2' },
+        { id: 'market3', title: 'market 3' }
       ]
-  },
+    }
   ]
 })

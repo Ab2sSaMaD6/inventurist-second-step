@@ -1,5 +1,4 @@
 // MUI
-import { Stack } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
 // Components
@@ -7,7 +6,6 @@ import TagsInput from './controls/TagsInput'
 import Checkbox from './controls/Checkbox'
 import Select from './controls/Select'
 import Button from './controls/Button'
-import useForm from '../hooks/useForm'
 
 const renderFields = ({ fields, values, handleInputChange }) => {
   return fields.map((field) => {
@@ -16,9 +14,9 @@ const renderFields = ({ fields, values, handleInputChange }) => {
     if (type === 'tags')
       return (
         <TagsInput
-        id={name}
+          id={name}
           key={name}
-          value={values[name]} 
+          value={values[name]}
           changeHandler={handleInputChange}
           label={label}
           classes={classes}
@@ -41,14 +39,14 @@ const renderFields = ({ fields, values, handleInputChange }) => {
           {...rest}
         />
       )
+
     return <div>invalid filed type</div>
   })
 }
 
-function Form({ config, initialValues,values,handleInputChange,   validate, onChange, onSubmit }) {
-  /* const { values, setValues, errors, setErrors, handleInputChange, resetForm } = useForm(initialValues, validate) */
-
+function Form({ config, initialValues, values, handleInputChange, validate, onChange, onSubmit }) {
   const { fields } = config
+
   return (
     <RootStyle>
       <form onSubmit={onSubmit} className="grid">
@@ -68,11 +66,11 @@ const RootStyle = styled('div')(({ theme }) => ({
   '.grid ': {
     display: 'grid',
     gap: '1rem',
-    gridTemplateColumns: 'repeat(auto-fit, 1fr)'
+    gridTemplateColumns: 'repeat(auto-fit, 25%)'
   },
 
   '.submitButton ': {
-    width: '100%'
+    width: '100%',
   },
 
   '.submitButton, .resetButton ': {
@@ -90,20 +88,19 @@ const RootStyle = styled('div')(({ theme }) => ({
     }
   },
   [theme.breakpoints.between('xs', 'sm')]: {
-    '.halfWidth': {
-      gridColumn: 'span 2 / auto'
+    '.fullWidth, .halfWidth': {
+      gridColumn: 'span 4 / auto'
     },
-    '.fullWidth': {
-      gridColumn: 'span 2 / auto'
+    '.submitButton, .resetButton ': {
+      gridColumn: 'span 2 / auto',
+      
     },
-    '.resetButton ': {
-      width: '100%'
-    }
   },
   [theme.breakpoints.down(300)]: {
     '.submitButton, .resetButton ': {
-      gridColumn: 'span 2 / auto'
-    }
+      gridColumn: 'span 4 / auto',
+      width: '100%'
+    },
   }
 }))
 
