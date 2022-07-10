@@ -12,7 +12,7 @@ export default function CssBaseline(theme) {
         html: {
           width: '100%',
           height: '100%',
-          WebkitOverflowScrolling: 'touch',
+          WebkitOverflowScrolling: 'touch'
           /* ...theme.typography.body1 */
         },
         body: {
@@ -49,7 +49,7 @@ export default function CssBaseline(theme) {
         img: {
           display: 'block',
           maxWidth: '100%'
-        },
+        }
       }
     }
   }

@@ -5,7 +5,6 @@ export default function useForm(initialValues, validate, validateOnChange = fals
   const [errors, setErrors] = useState({})
 
   const handleInputChange = (event) => {
-    console.log(event)
     const { name, value } = event.target
 
     setValues({
@@ -14,8 +13,6 @@ export default function useForm(initialValues, validate, validateOnChange = fals
     })
 
     if (validateOnChange) validate({ [name]: value })
-
-    console.log(name, value)
   }
 
   const resetForm = () => {

@@ -23,7 +23,7 @@ export default function Button(theme) {
         containedPrimary: {
           boxShadow: theme.customShadows.primary,
           borderRadius: 0,
-          maxWidth: '250px',
+          maxWidth: '250px'
         },
         containedSecondary: {
           boxShadow: theme.customShadows.secondary
@@ -50,5 +50,5 @@ export default function Button(theme) {
         }
       }
     }
-  };
+  }
 }

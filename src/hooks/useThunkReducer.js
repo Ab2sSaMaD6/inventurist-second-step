@@ -6,7 +6,6 @@ const useThunkReducer = (reducer, initialState) => {
   const enhancedDispatch = useCallback(
     (action) => {
       if (typeof action === 'function') {
-        console.log('It is a thunk')
         action(dispatch)
       } else {
         dispatch(action)

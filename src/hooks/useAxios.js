@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const useAxiosFunction = () => {
+const useAxios = () => {
   const [response, setResponse] = useState([])
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -37,4 +37,4 @@ const useAxiosFunction = () => {
   return [response, error, loading, axiosFetch]
 }
 
-export default useAxiosFunction
+export default useAxios

@@ -1,36 +1,55 @@
-import Chip from '@mui/material/Chip'
-import Autocomplete from '@mui/material/Autocomplete'
-import TextField from '@mui/material/TextField'
-import { InputLabel } from '@mui/material'
+import { InputLabel, Chip, Autocomplete, TextField } from '@mui/material'
+import PropTypes from 'prop-types'
 
-const TagsInput = ({ id, label, value, placeholder, classes, changeHandler, ...rest }) => {
-  return (
-    <Autocomplete
-    onChange={(e,v) => changeHandler({target: {name: id, value: v}})}
-      {...rest}
-      classes={{ root: classes }}
-      multiple
-      options={top100Films.map((option) => option.title)}
-      freeSolo
-      renderTags={(value, getTagProps) => (
-        value.map((option, index) => <Chip variant="outlined" label={option} {...getTagProps({ index })} />)
-      )
-        
-      }
-      renderInput={(params) => (
-        <>
-          <InputLabel shrink htmlFor={id}>
-            {label}
-          </InputLabel>
-          <TextField {...params} id={id} variant="outlined" placeholder={placeholder}/>
-        </>
-      )}
-    />
-  )
-}
+const TagsInput = ({ id, label, value, error, placeholder, classes, onChange }) => (
+  <Autocomplete
+    value={value}
+    autoSelect
+    clearOnBlur
+    onChange={(e, v) => onChange({ target: { name: id, value: v } })}
+    classes={{ root: classes }}
+    multiple
+    options={top100Films.map((option) => option.title)}
+    freeSolo
+    renderTags={(val, getTagProps) =>
+      val.map((option, index) => <Chip key={index} variant="outlined" label={option} {...getTagProps({ index })} />)
+    }
+    renderInput={(params) => (
+      <>
+        <InputLabel shrink htmlFor={id}>
+          {label}
+        </InputLabel>
+        <TextField
+          {...params}
+          id={id}
+          variant="outlined"
+          placeholder={placeholder}
+          error={!!error}
+          helperText={error}
+        />
+      </>
+    )}
+  />
+)
 
 TagsInput.defaultProps = {
   placeholder: 'Enter here...'
+}
+
+TagsInput.propTypes = {
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  classes: PropTypes.string,
+  value: PropTypes.array,
+  /*   options: PropTypes.arrayOf(
+    PropTypes.exact({
+      title: PropTypes.string,
+      year: PropTypes.number
+    })
+  ), */
+  error: PropTypes.string,
+  onChange: PropTypes.func
 }
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top

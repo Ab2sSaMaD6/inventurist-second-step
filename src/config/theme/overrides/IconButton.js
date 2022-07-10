@@ -16,11 +16,7 @@ export default function IconButton(theme) {
             '&:hover': { backgroundColor: theme.palette.action.hover }
           }
         }
-      ],
-
-      styleOverrides: {
-        root: {}
-      }
+      ]
     }
-  };
+  }
 }

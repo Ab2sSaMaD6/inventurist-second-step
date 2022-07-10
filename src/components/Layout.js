@@ -1,4 +1,5 @@
-// material
+import PropTypes from 'prop-types'
+// mui
 import { AppBar, Link, Toolbar, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 
@@ -52,31 +53,33 @@ function Copyright() {
   )
 }
 
-const Layout = ({ children }) => {
-  return (
-    <RootStyle>
-      <AppBar
-        position="absolute"
-        color="default"
-        elevation={0}
-        sx={{
-          position: 'relative',
-          borderBottom: (t) => `1px solid ${t.palette.divider}`
-        }}
-      >
-        <Toolbar>
-          <Typography variant="h6" color="primary" noWrap>
-            Inventurist
-          </Typography>
-        </Toolbar>
-      </AppBar>
+const Layout = ({ children }) => (
+  <RootStyle>
+    <AppBar
+      position="absolute"
+      color="default"
+      elevation={0}
+      sx={{
+        position: 'relative',
+        borderBottom: (t) => `1px solid ${t.palette.divider}`
+      }}
+    >
+      <Toolbar>
+        <Typography variant="h6" color="primary" noWrap>
+          Inventurist
+        </Typography>
+      </Toolbar>
+    </AppBar>
 
-      {/* main content */}
-      <MainStyle>{children}</MainStyle>
+    {/* main content */}
+    <MainStyle>{children}</MainStyle>
 
-      <Copyright />
-    </RootStyle>
-  )
+    <Copyright />
+  </RootStyle>
+)
+
+Layout.propTypes = {
+  children: PropTypes.node
 }
 
 export default Layout

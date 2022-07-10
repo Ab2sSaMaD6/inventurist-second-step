@@ -1,14 +1,15 @@
 // MUI
 import { styled } from '@mui/material/styles'
-
+//
+import PropTypes from 'prop-types'
 // Components
 import TagsInput from './controls/TagsInput'
 import Checkbox from './controls/Checkbox'
 import Select from './controls/Select'
 import Button from './controls/Button'
 
-const renderFields = ({ fields, values, handleInputChange }) => {
-  return fields.map((field) => {
+const renderFields = ({ fields, values, errors, handleInputChange }) =>
+  fields.map((field) => {
     const { type, name, label, classes, options, ...rest } = field
 
     if (type === 'tags')
@@ -16,16 +17,27 @@ const renderFields = ({ fields, values, handleInputChange }) => {
         <TagsInput
           id={name}
           key={name}
-          value={values[name]}
-          changeHandler={handleInputChange}
           label={label}
+          value={values[name]}
+          options={options}
           classes={classes}
+          onChange={handleInputChange}
+          error={errors[name]}
           {...rest}
         />
       )
 
     if (type === 'checkbox')
-      return <Checkbox key={name} value={values[name]} label={label} classes={field.classes} {...rest} />
+      return (
+        <Checkbox
+          key={name}
+          name={name}
+          value={values[name]}
+          label={label}
+          classes={field.classes}
+          onChange={handleInputChange}
+        />
+      )
     if (type === 'select')
       return (
         <Select
@@ -36,24 +48,26 @@ const renderFields = ({ fields, values, handleInputChange }) => {
           label={label}
           classes={classes}
           options={options}
+          error={errors[name]}
           {...rest}
         />
       )
 
-    return <div>invalid filed type</div>
+    return <>invalid filed type</>
   })
-}
 
-function Form({ config, initialValues, values, handleInputChange, validate, onChange, onSubmit }) {
-  const { fields } = config
-
+function Form({ config, values, errors, handleInputChange, onSubmit, onReset, status }) {
   return (
     <RootStyle>
-      <form onSubmit={onSubmit} className="grid">
-        {renderFields({ fields, values, handleInputChange })}
+      <form onSubmit={onSubmit} onReset={onReset} className="grid">
+        {renderFields({ fields: config.fields, values, errors, handleInputChange })}
 
-        <Button key="reset" className="resetButton" text="Reset" variant="text" />
-        <Button key="submit" className="submitButton" type="submit" text="Submit" />
+        <Button type="reset" className="resetButton" variant="text" disabled={status === 'pending'}>
+          Reset
+        </Button>
+        <Button type="submit" className="submitButton" disabled={status === 'pending'}>
+          Submit
+        </Button>
       </form>
     </RootStyle>
   )
@@ -70,7 +84,7 @@ const RootStyle = styled('div')(({ theme }) => ({
   },
 
   '.submitButton ': {
-    width: '100%',
+    width: '100%'
   },
 
   '.submitButton, .resetButton ': {
@@ -92,20 +106,37 @@ const RootStyle = styled('div')(({ theme }) => ({
       gridColumn: 'span 4 / auto'
     },
     '.submitButton, .resetButton ': {
-      gridColumn: 'span 2 / auto',
-      
-    },
+      gridColumn: 'span 2 / auto'
+    }
   },
   [theme.breakpoints.down(300)]: {
     '.submitButton, .resetButton ': {
       gridColumn: 'span 4 / auto',
       width: '100%'
-    },
+    }
   }
 }))
 
-Form.defaultProps = {
-  onChange: ({ key, value }) => value
+Form.propTypes = {
+  config: PropTypes.exact({
+    fields: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        type: PropTypes.oneOf(['tags', 'checkbox', 'select']),
+        label: PropTypes.string,
+        classes: PropTypes.string,
+        options: PropTypes.array,
+        placeholder: PropTypes.string,
+        required: PropTypes.bool
+      })
+    )
+  }),
+  values: PropTypes.object,
+  status: PropTypes.string,
+  errors: PropTypes.object,
+  handleInputChange: PropTypes.func,
+  onSubmit: PropTypes.func,
+  onReset: PropTypes.func
 }
 
 export default Form

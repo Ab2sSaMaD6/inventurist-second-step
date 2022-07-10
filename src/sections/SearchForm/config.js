@@ -5,14 +5,15 @@ export const configurer = ({ contextOptions = [] }) => ({
       type: 'tags',
       label: 'Context(s)',
       classes: 'fullWidth',
-      required: true
+      options: contextOptions
     },
     {
       name: 'questions',
       type: 'tags',
       label: 'Questions',
       classes: 'fullWidth',
-      required: true
+      required: true,
+      options: contextOptions
     },
     {
       name: 'companies',
@@ -20,7 +21,7 @@ export const configurer = ({ contextOptions = [] }) => ({
       label: 'Companies/Websites',
       classes: 'fullWidth',
       placeholder: 'Enter domain here...',
-      required: true
+      options: contextOptions
     },
     {
       name: 'is_only',
